@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title> عرض المنتجات :</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h3 { color: #2c3e50; }
+        a { text-decoration: none; color: #3498db; }
+        a:hover { text-decoration: underline; }
+        button {
+            background-color: #3498db; color: white; border: none;
+            padding: 8px 14px; cursor: pointer; border-radius: 4px;
+        }
+        button:hover { background-color: #2980b9; }
+        .product-card {
+            border: 1px solid #ccc; padding: 10px; width: 200px;
+            background-color: #fff; border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;
+        }
+        .product-card img { border-radius: 4px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<h1>قائمة المنتجات :</h1>
+
+<a href="{{ url_for('add_product') }}">
+    <button>إضافة منتج جديد :</button>
+</a>
+
+<div class="products-container">
+    {% for p in products %}
+    <div class="product-card">
+        {% if p.image %}
+        <img src="{{ url_for('static', filename='uploads/' ~ p.image) }}" width="180" alt="{{ p.name }}">
+        {% endif %}
+        <h3>{{ p.name }}</h3>
+        <p>السعر : {{ p.price }}</p>
+        <a href="{{ url_for('product_details', product_id=p.id) }}">تفاصيل المنتج</a>
+        <a href="{{ url_for('delete_product', product_id=p.id) }}">حذف</a>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

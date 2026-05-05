@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>حذف المنتج</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; background-color: #f9f9f9;
+            margin: 20px; color: #333;
+        }
+        h1, h3 { color: #2c3e50; }
+        a { text-decoration: none; color: #3498db; }
+        a:hover { text-decoration: underline; }
+        button {
+            background-color: #3498db; color: white; border: none;
+            padding: 8px 14px; cursor: pointer; border-radius: 4px;
+        }
+        button:hover { background-color: #2980b9; }
+        .delete-box {
+            background-color: #fff3f3; border: 1px solid #e74c3c;
+            padding: 20px; border-radius: 6px; max-width: 400px;
+        }
+        .delete-box h1 { color: #e74c3c; }
+    </style>
+</head>
+<body>
+<div class="delete-box">
+    <h1>تأكيد الحذف</h1>
+
+    <p>هل أنت متأكد أنك تريد حذف المنتج <strong>{{ product.name }}</strong>؟</p>
+
+    {% if product.image %}
+    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" width="200" alt="{{ product.name }}">
+    {% endif %}
+
+    <form method="post">
+        <button type="submit">نعم، احذف</button>
+        <a href="{{ url_for('products') }}">
+            <button type="button">إلغاء</button>
+        </a>
+    </form>
+</div>
+</body>
+</html>

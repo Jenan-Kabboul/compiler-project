@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; background-color: #f9f9f9;
+            margin: 20px; color: #333;
+        }
+        h1, h3 { color: #2c3e50; }
+        a { text-decoration: none; color: #3498db; }
+        a:hover { text-decoration: underline; }
+        button {
+            background-color: #3498db; color: white; border: none;
+            padding: 8px 14px; cursor: pointer; border-radius: 4px;
+        }
+        button:hover { background-color: #2980b9; }
+        .product-details {
+            background-color: #fff; padding: 20px; border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div class="product-details">
+    <h1>{{ product.name }}</h1>
+
+    {% if product.image %}
+    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" width="300" alt="{{ product.name }}">
+    {% endif %}
+
+    <p><strong>السعر : </strong> {{ product.price }}</p>
+    <p><strong>التفاصيل : </strong><br>{{ product.details }}</p>
+
+    <a href="{{ url_for('products') }}">
+        <button>رجوع إلى القائمة</button>
+    </a>
+</div>
+</body>
+</html>
